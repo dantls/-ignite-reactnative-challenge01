@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, View, Text, StyleSheet, FlatListProps } from 'react-native';
+import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
 function FlatListHeaderComponent() {
   return (
@@ -9,7 +9,7 @@ function FlatListHeaderComponent() {
   )
 }
 
-interface MyTasksListProps {
+interface MyTasksListProps{
   tasks: {
     id: number;
     title: string;
@@ -28,15 +28,27 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
         return (
           <TouchableOpacity
             testID={`button-${index}`}
+            style={
+              item.done 
+              ? styles.taskButtonDone
+              : styles.taskButton
+            }
             activeOpacity={0.7}
-            //TODO - use onPress, onLongPress and style props
+            onLongPress={()=>onLongPress(item.id)}
+            onPress={()=>onPress(item.id)}
           >
             <View 
               testID={`marker-${index}`}
-              //TODO - use style prop 
+              style={item.done 
+                ? styles.taskMarkerDone
+                : styles.taskMarker
+              }
             />
             <Text 
-              //TODO - use style prop
+              style={item.done 
+                ? styles.taskTextDone
+                : styles.taskText
+              }
             >
               {item.title}
             </Text>
