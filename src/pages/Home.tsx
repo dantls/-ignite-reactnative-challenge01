@@ -28,15 +28,18 @@ export function Home() {
   }
 
   function handleMarkTaskAsDone(id: number) {
-    const taskUpdated = tasks.find(task => task.id === id);
+    const updatedTask = tasks.map(task => ({...task}))
+
+    const taskUpdated = updatedTask.find(task => task.id === id);
 
     if(!taskUpdated){
       return;
     }
 
-    taskUpdated.done = !taskUpdated.done  
+    taskUpdated.done = true 
 
-    setTasks(oldState => [...oldState, taskUpdated])
+    setTasks(updatedTask)
+
   }
 
   function handleRemoveTask(id: number) {
